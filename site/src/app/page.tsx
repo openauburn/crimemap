@@ -264,7 +264,7 @@ export default function Home() {
         onChange={setSelectedTypes}
         renderOption={renderMultiSelectOption}
         clearable
-        searchable
+        searchable={isMedScreen ? false : true}
         hidePickedOptions
       />
     ),
@@ -275,7 +275,7 @@ export default function Home() {
           h={450}
           data={filteredTimeseries.data}
           dataKey="month"
-          style={{ width: "50vw" }}
+          style={{ width: isMedScreen ? "80vw" : "50vw" }}
           series={filteredTimeseries.series}
           curveType="monotone"
           gridAxis="xy"
@@ -285,7 +285,7 @@ export default function Home() {
             ),
           }}
           withXAxis={!isMedScreen}
-          withYAxis={!isMedScreen}
+          withYAxis={true}
           withDots={!isMedScreen}
         />
         <SimpleGrid cols={1} spacing="xs">
@@ -306,7 +306,7 @@ export default function Home() {
       </Stack>
     ),
     about: (
-      <Box style={{ width: "30vw" }}>
+      <Box style={{ width: isMedScreen ? "70vw" : "30vw" }}>
         <Title order={3}>Auburn University Crime Map</Title>
         <Text>
           This crime heatmap is an interactive tool that visualizes crime data
@@ -491,11 +491,16 @@ export default function Home() {
             ) : (
               <></>
             )}
-            <Group>
+            <Group
+              justify="center"
+              style={{
+                width: isSmallScreen ? "90vw" : "auto", // Full width
+              }}
+            >
               <Text size="sm">Low</Text>
               <Box
                 style={{
-                  width: 200, // Full width
+                  width: isSmallScreen ? "40%" : 200, // Full width
                   height: 10, // Adjust thickness of the bar
                   borderRadius: "15px", // Round the corners
                   background:
