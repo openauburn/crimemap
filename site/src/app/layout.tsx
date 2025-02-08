@@ -10,6 +10,7 @@ import {
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({
@@ -34,23 +35,11 @@ export default function RootLayout({
         />
         <ColorSchemeScript />
       </head>
+      <GoogleTagManager gtmId="G-GGXECGJ35B" />
       <body className={inter.className}>
         <MantineProvider forceColorScheme="light">
           <AppShell>
             <AppShell.Main>{children}</AppShell.Main>
-            <Script
-              src="https://www.googletagmanager.com/gtag/js?id=G-GGXECGJ35B"
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){window.dataLayer.push(arguments);}
-              gtag('js', new Date());
-
-              gtag('config', 'G-GGXECGJ35B');
-            `}
-            </Script>
           </AppShell>
         </MantineProvider>
       </body>
